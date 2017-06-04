@@ -4,8 +4,8 @@
     <!-- Define MySQL Provider -->
     <persistence-unit name="mysql">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>data.CustomerEntity</class>
-        <class>data.CustomerOrderEntity</class>
+        <class>data.EntityCustomer</class>
+        <class>data.EntityCustomerOrder</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/igt?useSSL=false"/>
@@ -21,8 +21,8 @@
     <!-- Define MongoDB Provider -->
     <persistence-unit name="mongodb" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
-        <class>data.CustomerEntity</class>
-        <class>data.CustomerOrderEntity</class>
+        <class>data.EntityCustomer</class>
+        <class>data.EntityCustomerOrder</class>
         <properties>
             <property name="hibernate.ogm.datastore.provider" value="org.hibernate.ogm.datastore.mongodb.impl.MongoDBDatastoreProvider" />
             <property name="hibernate.ogm.datastore.database" value="igt" />
@@ -47,8 +47,8 @@
     <!-- TODO - not working unconfigured table - Define Cassandra Provider -->
     <persistence-unit name="cassandra" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
-        <class>data.CustomerEntity</class>
-        <class>data.CustomerOrderEntity</class>
+        <class>data.EntityCustomer</class>
+        <class>data.EntityCustomerOrder</class>
         <properties>
             <property name="hibernate.ogm.datastore.provider" value="org.hibernate.ogm.datastore.cassandra.impl.CassandraDatastoreProvider"/>
             <property name="hibernate.ogm.datastore.host" value="localhost:9042"/>
@@ -56,5 +56,11 @@
         </properties>
     </persistence-unit>
 
-    <!-- TODO - Infinispan -->
+    <!-- Define Infinispan Provider -->
+    <persistence-unit name="infinispan" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="infinispan" />
+        </properties>
+    </persistence-unit>
 </persistence>
