@@ -54,7 +54,7 @@ public class Main {
                 currentService = new MultiDBService(dbConnection);
                 break;
             case "neo4j":
-                // TODO - Connect Neo4J
+                currentService = new MultiDBService(dbConnection);
                 break;
 
             case "cassandra":

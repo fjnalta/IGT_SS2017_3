@@ -33,5 +33,15 @@
         </properties>
     </persistence-unit>
 
-    <!-- TODO - Neo4J Cassandra Infinispan -->
+    <persistence-unit name="neo4j" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="neo4j_embedded" />
+            <property name="hibernate.ogm.neo4j.database_path" value=".neo4j/" />
+            <property name="hibernate.search.default.directory_provider"
+                      value="ram" />
+        </properties>
+    </persistence-unit>
+
+    <!-- TODO - Cassandra Infinispan -->
 </persistence>
