@@ -33,6 +33,7 @@
         </properties>
     </persistence-unit>
 
+    <!-- Define Neo4J Provider -->
     <persistence-unit name="neo4j" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
         <properties>
@@ -43,5 +44,17 @@
         </properties>
     </persistence-unit>
 
-    <!-- TODO - Cassandra Infinispan -->
+    <!-- TODO - not working unconfigured table - Define Cassandra Provider -->
+    <persistence-unit name="cassandra" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <class>data.CustomerEntity</class>
+        <class>data.CustomerOrderEntity</class>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="org.hibernate.ogm.datastore.cassandra.impl.CassandraDatastoreProvider"/>
+            <property name="hibernate.ogm.datastore.host" value="localhost:9042"/>
+            <property name="hibernate.ogm.datastore.database" value="igt"/>
+        </properties>
+    </persistence-unit>
+
+    <!-- TODO - Infinispan -->
 </persistence>
