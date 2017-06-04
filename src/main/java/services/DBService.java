@@ -18,11 +18,11 @@ import java.util.List;
  */
 public interface DBService {
 
-    public void createCustomer(CustomerEntity customer);
-    public List<CustomerEntity> getCustomers();
-    public void updateCustomer(CustomerEntity customer);
-    public boolean removeCustomer(Long id);
+    void createCustomer(CustomerEntity customer);
+    List<CustomerEntity> getCustomers();
+    void updateCustomer(CustomerEntity customer);
+    boolean removeCustomer(Long id);
 
-    public void disconnect();
+    void disconnect();
 
 }
