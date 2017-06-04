@@ -10,7 +10,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Indexed
-@Table(name = "customer_order", schema = "IGT", catalog = "")
 public class EntityCustomerOrder {
     private int idorder;
     private int fKCustomer;

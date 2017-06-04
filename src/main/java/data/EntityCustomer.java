@@ -10,7 +10,6 @@ import java.util.Date;
  */
 @Entity
 @Indexed
-@Table(name = "customer", schema = "IGT", catalog = "")
 public class EntityCustomer {
     private int idcustomer;
     private Date birthdate;
