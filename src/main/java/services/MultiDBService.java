@@ -1,12 +1,17 @@
 package services;
 
-import data.Customer;
+import data.CustomerEntity;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 /**
  * Created by ajo on 02.06.17.
+ * This Class implements the Database Service. It can be used with an OR-Mapper
+ * to handle different types of SQL and noSQL databases.
  */
 public class MultiDBService implements DBService {
 
@@ -20,18 +25,54 @@ public class MultiDBService implements DBService {
         factory = Persistence.createEntityManagerFactory(database);
     }
 
-    public void createCustomer(Customer customer) {
+    /**
+     * Database Interface which creates a new Customer
+     * @param customer
+     */
+    public void createCustomer(CustomerEntity customer) {
+        EntityManager entityManager = factory.createEntityManager();
 
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        entityManager.persist(customer);
+
+        entityManager.flush();
+        transaction.commit();
+        entityManager.close();
     }
 
-    public Customer getCustomer() {
-        return null;
+    /**
+     * Database Interface which gets all Customer Entries
+     * @returns all CustomerEntities
+     */
+    public List<CustomerEntity> getCustomers() {
+        EntityManager entityManager = factory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        transaction.begin();
+        List<CustomerEntity> result = entityManager
+                .createQuery("SELECT c FROM CustomerEntity c", CustomerEntity.class)
+                .getResultList();
+
+        transaction.commit();
+        entityManager.close();
+
+        return result;
     }
 
-    public void updateCustomer(Customer customer) {
-
+    /**
+     * Database Interface which updates a Customer
+     * @param customer the updated CustomerEntity
+     */
+    public void updateCustomer(CustomerEntity customer) {
     }
 
+    /**
+     * Database Interface which deletes a Customer
+     * @param id
+     * @returns true if the delete was successful
+     */
     public boolean removeCustomer(Long id) {
         return false;
     }
