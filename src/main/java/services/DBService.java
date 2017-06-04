@@ -4,7 +4,9 @@ package services;
  * Created by ajo on 02.06.17.
  */
 
-import data.Customer;
+import data.CustomerEntity;
+
+import java.util.List;
 
 /**
  * Interface which represents the CRUD operations
@@ -16,9 +18,9 @@ import data.Customer;
  */
 public interface DBService {
 
-    public void createCustomer(Customer customer);
-    public Customer getCustomer();
-    public void updateCustomer(Customer customer);
+    public void createCustomer(CustomerEntity customer);
+    public List<CustomerEntity> getCustomers();
+    public void updateCustomer(CustomerEntity customer);
     public boolean removeCustomer(Long id);
 
     public void disconnect();
