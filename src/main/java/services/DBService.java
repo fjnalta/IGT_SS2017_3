@@ -20,7 +20,7 @@ public interface DBService {
 
     void createCustomer(CustomerEntity customer);
     List<CustomerEntity> getCustomers();
-    void updateCustomer(CustomerEntity customer);
+    CustomerEntity updateCustomer(CustomerEntity customer);
     boolean deleteCustomer(int id);
 
     void disconnect();

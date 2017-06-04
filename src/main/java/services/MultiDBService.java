@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -65,7 +66,19 @@ public class MultiDBService implements DBService {
      * Database Interface which updates a Customer
      * @param customer the updated CustomerEntity
      */
-    public void updateCustomer(CustomerEntity customer) {
+    public CustomerEntity updateCustomer(CustomerEntity customer) {
+        EntityManager entityManager = factory.createEntityManager();
+
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        CustomerEntity result = entityManager.find(CustomerEntity.class, customer.getIdcustomer());
+        result.setBirthdate(Calendar.getInstance().getTime());
+
+        transaction.commit();
+        entityManager.close();
+
+        return result;
     }
 
     /**

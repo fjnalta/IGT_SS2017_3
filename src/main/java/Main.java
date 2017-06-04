@@ -28,6 +28,8 @@ public class Main {
         String dbConnection = "";
         String dbOperation = "";
 
+        CustomerEntity currentEntity = null;
+
         System.out.println("Please select the Database - q/ENTER = Quit");
         System.out.println("[mysql; mongodb; neo4j; cassandra; infinispan]");
         System.out.print("Selection: ");
@@ -97,29 +99,17 @@ public class Main {
                     System.out.println("Customer: " + entity.toString() + "; Birthdate: " + entity.getBirthdate());
                 }
                 break;
+            // Update
             case "u":
-                // Update
+                currentEntity = readSelection();
+                currentService.updateCustomer(currentEntity);
+                System.out.println("updated " + currentEntity);
                 break;
             // Delete
             case "d":
-                int counter = 0;
-                int customerNumber = 0;
-
-                System.out.println("Select the customer number to delete");
-                List<CustomerEntity> deletableCustomers = currentService.getCustomers();
-                for (CustomerEntity entity : deletableCustomers) {
-                    counter++;
-                    System.out.println("NR: " + counter + " Customer: " + entity.toString() + "; Birthdate: " + entity.getBirthdate());
-                }
-
-                System.out.print("Selection: ");
-                try {
-                    customerNumber = Integer.parseInt(br.readLine());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                currentService.deleteCustomer(deletableCustomers.get(customerNumber-1).getIdcustomer());
+                currentEntity = readSelection();
+                currentService.deleteCustomer(currentEntity.getIdcustomer());
+                System.out.println("deleted " + currentEntity);
                 break;
             default:
                 break;
@@ -130,5 +120,27 @@ public class Main {
         System.out.println("Disconnect");
         currentService.disconnect();
 
+    }
+
+    private static CustomerEntity readSelection() {
+        int counter = 0;
+        int customerNumber = 0;
+
+        System.out.println("Select the customer:");
+        List<CustomerEntity> deletableCustomers = currentService.getCustomers();
+        for (CustomerEntity entity : deletableCustomers) {
+            counter++;
+            System.out.println("NR: " + counter + " Customer: " + entity.toString() + "; Birthdate: " + entity.getBirthdate());
+        }
+
+        System.out.print("Selection: ");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            customerNumber = Integer.parseInt(br.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return deletableCustomers.get(customerNumber-1);
     }
 }
