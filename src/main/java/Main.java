@@ -102,6 +102,24 @@ public class Main {
                 break;
             // Delete
             case "d":
+                int counter = 0;
+                int customerNumber = 0;
+
+                System.out.println("Select the customer number to delete");
+                List<CustomerEntity> deletableCustomers = currentService.getCustomers();
+                for (CustomerEntity entity : deletableCustomers) {
+                    counter++;
+                    System.out.println("NR: " + counter + " Customer: " + entity.toString() + "; Birthdate: " + entity.getBirthdate());
+                }
+
+                System.out.print("Selection: ");
+                try {
+                    customerNumber = Integer.parseInt(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                currentService.deleteCustomer(deletableCustomers.get(customerNumber-1).getIdcustomer());
                 break;
             default:
                 break;
