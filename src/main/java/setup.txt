@@ -3,7 +3,7 @@ MySQL Setup:
 
 ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
 CREATE DATABASE IF NOT EXISTS IGT;
-CREATE TABLE `igt`.`customer` (
+CREATE TABLE `igt`.`customerEntity` (
   `idcustomer` INT NOT NULL AUTO_INCREMENT,
   `birthdate` DATE NOT NULL,
   PRIMARY KEY (`idcustomer`));
@@ -16,14 +16,14 @@ CREATE TABLE `igt`.`customer` (
   INDEX `fk_customer_idx` (`fK_customer` ASC),
   CONSTRAINT `fk_customer`
     FOREIGN KEY (`fK_customer`)
-    REFERENCES `igt`.`customer` (`idcustomer`)
+    REFERENCES `igt`.`customerEntity` (`idcustomer`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
 
 
 MongoDB Setup:
 --------------
-TODO - set primary Key
+none
 
 
 Neo4j Setup:
@@ -34,12 +34,12 @@ Cassandra Setup:
 ----------------
 
 create keyspace igt with replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
-create table customer ( idcustomer uuid, birthdate timestamp, PRIMARY KEY (idcustomer));
+create table customerEntity ( idcustomer uuid, birthdate timestamp, PRIMARY KEY (idcustomer));
 create table customer_order ( idorder uuid, fk_customer uuid, price int, PRIMARY KEY (idorder));
 
 
 Infinispan Setup:
 -----------------
-
+none
 
 
