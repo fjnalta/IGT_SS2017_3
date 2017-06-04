@@ -21,7 +21,7 @@ public interface DBService {
     void createCustomer(CustomerEntity customer);
     List<CustomerEntity> getCustomers();
     void updateCustomer(CustomerEntity customer);
-    boolean removeCustomer(Long id);
+    boolean deleteCustomer(int id);
 
     void disconnect();
 

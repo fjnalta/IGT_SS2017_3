@@ -49,8 +49,8 @@ public class MultiDBService implements DBService {
     public List<CustomerEntity> getCustomers() {
         EntityManager entityManager = factory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-
         transaction.begin();
+
         List<CustomerEntity> result = entityManager
                 .createQuery("SELECT c FROM CustomerEntity c", CustomerEntity.class)
                 .getResultList();
@@ -73,8 +73,24 @@ public class MultiDBService implements DBService {
      * @param id
      * @returns true if the delete was successful
      */
-    public boolean removeCustomer(Long id) {
-        return false;
+    public boolean deleteCustomer(int id) {
+        EntityManager entityManager = factory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        CustomerEntity customer = entityManager.find(CustomerEntity.class, id);
+        if (customer != null) {
+            entityManager.remove(customer);
+        }
+
+        transaction.commit();
+        entityManager.close();
+
+        if(customer != null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public void disconnect() {
