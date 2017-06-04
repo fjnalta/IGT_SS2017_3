@@ -22,5 +22,6 @@
 hs_err_pid*
 /bin/
 .idea
+.neo4j
 *.iml
 target/
