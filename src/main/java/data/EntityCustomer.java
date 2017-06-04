@@ -1,5 +1,7 @@
 package data;
 
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -7,12 +9,14 @@ import java.util.Date;
  * Created by ajo on 04.06.17.
  */
 @Entity
+@Indexed
 @Table(name = "customer", schema = "IGT", catalog = "")
-public class CustomerEntity {
+public class EntityCustomer {
     private int idcustomer;
     private Date birthdate;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idcustomer")
     public int getIdcustomer() {
         return idcustomer;
@@ -37,7 +41,7 @@ public class CustomerEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CustomerEntity that = (CustomerEntity) o;
+        EntityCustomer that = (EntityCustomer) o;
 
         if (idcustomer != that.idcustomer) return false;
         if (birthdate != null ? !birthdate.equals(that.birthdate) : that.birthdate != null) return false;

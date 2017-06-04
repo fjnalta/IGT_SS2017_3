@@ -1,6 +1,6 @@
 package services;
 
-import data.CustomerEntity;
+import data.EntityCustomer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,10 +27,10 @@ public class MultiDBService implements DBService {
     }
 
     /**
-     * Database Interface which creates a new Customer
+     * Database Interface which creates a new CustomerEntity
      * @param customer
      */
-    public void createCustomer(CustomerEntity customer) {
+    public void createCustomer(EntityCustomer customer) {
         EntityManager entityManager = factory.createEntityManager();
 
         EntityTransaction transaction = entityManager.getTransaction();
@@ -44,16 +44,16 @@ public class MultiDBService implements DBService {
     }
 
     /**
-     * Database Interface which gets all Customer Entries
+     * Database Interface which gets all CustomerEntity Entries
      * @returns all CustomerEntities
      */
-    public List<CustomerEntity> getCustomers() {
+    public List<EntityCustomer> getCustomers() {
         EntityManager entityManager = factory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        List<CustomerEntity> result = entityManager
-                .createQuery("SELECT c FROM CustomerEntity c", CustomerEntity.class)
+        List<EntityCustomer> result = entityManager
+                .createQuery("SELECT c FROM EntityCustomer c", EntityCustomer.class)
                 .getResultList();
 
         transaction.commit();
@@ -63,16 +63,16 @@ public class MultiDBService implements DBService {
     }
 
     /**
-     * Database Interface which updates a Customer
+     * Database Interface which updates a CustomerEntity
      * @param customer the updated CustomerEntity
      */
-    public CustomerEntity updateCustomer(CustomerEntity customer) {
+    public EntityCustomer updateCustomer(EntityCustomer customer) {
         EntityManager entityManager = factory.createEntityManager();
 
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        CustomerEntity result = entityManager.find(CustomerEntity.class, customer.getIdcustomer());
+        EntityCustomer result = entityManager.find(EntityCustomer.class, customer.getIdcustomer());
         result.setBirthdate(Calendar.getInstance().getTime());
 
         transaction.commit();
@@ -82,7 +82,7 @@ public class MultiDBService implements DBService {
     }
 
     /**
-     * Database Interface which deletes a Customer
+     * Database Interface which deletes a CustomerEntity
      * @param id
      * @returns true if the delete was successful
      */
@@ -91,7 +91,7 @@ public class MultiDBService implements DBService {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        CustomerEntity customer = entityManager.find(CustomerEntity.class, id);
+        EntityCustomer customer = entityManager.find(EntityCustomer.class, id);
         if (customer != null) {
             entityManager.remove(customer);
         }

@@ -4,8 +4,9 @@ package services;
  * Created by ajo on 02.06.17.
  */
 
-import data.CustomerEntity;
+import data.EntityCustomer;
 
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 /**
@@ -18,9 +19,9 @@ import java.util.List;
  */
 public interface DBService {
 
-    void createCustomer(CustomerEntity customer);
-    List<CustomerEntity> getCustomers();
-    CustomerEntity updateCustomer(CustomerEntity customer);
+    void createCustomer(EntityCustomer customer);
+    List<EntityCustomer> getCustomers();
+    EntityCustomer updateCustomer(EntityCustomer customer);
     boolean deleteCustomer(int id);
 
     void disconnect();
