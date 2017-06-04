@@ -30,44 +30,15 @@ public class Main {
 
         CustomerEntity currentEntity = null;
 
-        System.out.println("Please select the Database - q/ENTER = Quit");
+        System.out.println("Please select the Database");
         System.out.println("[mysql; mongodb; neo4j; cassandra; infinispan]");
         System.out.print("Selection: ");
 
         try {
             dbConnection = br.readLine();
+            currentService = new MultiDBService(dbConnection);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        switch (dbConnection) {
-            // MySQL Connection
-            case "mysql":
-                currentService = new MultiDBService(dbConnection);
-                break;
-            // MongoDB Connection
-            case "mongodb":
-                /**
-                 * TODO - the connection is working but MongoDB can't
-                 * autoincrement the id -> inserting is a problem
-                 */
-                currentService = new MultiDBService(dbConnection);
-                break;
-            case "neo4j":
-                currentService = new MultiDBService(dbConnection);
-                break;
-
-            case "cassandra":
-                // TODO - Connect Cassandra
-                break;
-
-            case "infinispan":
-                // TODO - Connect Infinispan/EhCache
-                break;
-            // Quit on default
-            default:
-                break;
-
         }
 
         System.out.println("Please select the Operation");
